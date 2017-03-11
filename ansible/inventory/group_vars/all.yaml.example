@@ -1,0 +1,5 @@
+---
+vhost_root: ''
+http_conf_root: ''
+elb_dns_name: ''
+alias_hosted_zone_id: ''
