@@ -1,9 +1,0 @@
----
-- name: Find existing instances
-  ec2_remote_facts:
-    filters:
-      "tag:Name": "aws-lamp-virtualhost"
-  register: ec2_remote_facts
-
-- name: "Instances found:"
-  debug: var=ec2_remote_facts.id
