@@ -6,4 +6,5 @@
   register: ec2_remote_facts
 
 - name: "Instances found:"
-  debug: var=ec2_remote_facts.id
+  debug: var=item.id
+  with_flattened: "{{ ec2_remote_facts.instances }}"
