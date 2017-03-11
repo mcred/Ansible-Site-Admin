@@ -1,0 +1,29 @@
+---
+- name: Create new Route 53 Zone
+  route53_zone:
+    zone: "{{domain}}"
+    state: "present"
+    comment: "Hosted Zone for {{domain}}"
+  register: zone_out
+
+- name: Add main A Record for ELB
+  route53:
+    command: create
+    zone: "{{domain}}"
+    record: "{{domain}}"
+    type: "A"
+    value: "{{ elb_dns_name }}"
+    alias: "True"
+    overwrite: yes
+    alias_hosted_zone_id: "{{ alias_hosted_zone_id }}"
+
+- name: Add redirect A record to Main record
+  route53:
+    command: create
+    zone: "{{domain}}"
+    record: "*.{{domain}}"
+    type: "A"
+    value: "{{ elb_dns_name }}"
+    alias: "True"
+    overwrite: yes
+    alias_hosted_zone_id: "{{ alias_hosted_zone_id }}"

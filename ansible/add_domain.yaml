@@ -10,3 +10,8 @@
   gather_facts: no
   roles:
   - add-domain-to-hosts
+
+- hosts: localhost
+  connection: local
+  roles:
+  - add-zones-to-route53
