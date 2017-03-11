@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# Continuous integration script that Jenkins (or whatever) calls which:
+# Deploys to dev, staging or production as appropriate
+
+set -u # Variables must be explicit
+set -e # If any command fails, fail the whole thing
+set -o pipefail
+
+cd ansible
+source utilities/init.sh
+
+PS3='What do you want to do? '
+options=("View Running Hosts" "Quit")
+
+select opt in "${options[@]}"
+do
+    case $opt in
+        "View Running Hosts")
+            ansible-playbook gethosts.yaml -vvv
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo invalid option;;
+    esac
+done
