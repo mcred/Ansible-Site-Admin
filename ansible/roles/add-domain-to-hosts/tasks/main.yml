@@ -1,6 +1,21 @@
 ---
 - name: Create root directory
   become: true
-  file: state=directory path={{ item }} owner=apache group=apache
-  with_items:
-    - "{{vhost_root}}{{domain}}"
+  file:
+    state: "directory"
+    path: "{{vhost_root}}{{domain}}"
+    owner: "apache"
+    group: "apache"
+
+- name: Create new VHOST conf file
+  become: true
+  synchronize:
+    src: "../templates/new_domain.conf"
+    dest: "{{http_conf_root}}{{domain}}.conf"
+
+- name: Add Domain to new VHOST file
+  become: true
+  replace:
+    dest: "{{http_conf_root}}{{domain}}.conf"
+    regexp: "NEWDOMAIN"
+    replace: "{{domain}}"
