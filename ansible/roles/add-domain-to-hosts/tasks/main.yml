@@ -1,0 +1,6 @@
+---
+- name: Create root directory
+  become: true
+  file: state=directory path={{ item }} owner=apache group=apache
+  with_items:
+    - "{{vhost_root}}{{domain}}"

@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+  - set-variables
+  - list-running-hosts
+  - add-hosts
+
+- hosts: ec2hosts
+  gather_facts: no
+  roles:
+  - add-domain-to-hosts
