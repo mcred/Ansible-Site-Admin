@@ -1,3 +1,4 @@
 #Credential Files
 *.pem
 aws_keys
+all.yaml
