@@ -19,3 +19,16 @@
     dest: "{{http_conf_root}}{{domain}}.conf"
     regexp: "NEWDOMAIN"
     replace: "{{domain}}"
+
+- name: Create site index file
+  become: true
+  synchronize:
+    src: "../templates/site_index.php"
+    dest: "{{vhost_root}}{{domain}}/index.php"
+
+- name: Add Domain to new site index
+  become: true
+  replace:
+    dest: "{{vhost_root}}{{domain}}/index.php"
+    regexp: "NEWDOMAIN"
+    replace: "{{domain}}"
