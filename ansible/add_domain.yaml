@@ -10,6 +10,7 @@
   gather_facts: no
   roles:
   - add-domain-to-hosts
+  - restart-httpd
 
 - hosts: localhost
   connection: local

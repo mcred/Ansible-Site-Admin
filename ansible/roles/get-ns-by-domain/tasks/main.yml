@@ -1,0 +1,11 @@
+---
+- name: Get nameserver by domain
+  route53:
+      command: get
+      zone: "{{ domain }}"
+      record: "{{ domain }}"
+      type: NS
+  register: rec
+
+- name: "Requested Nameserver:"
+  debug: var=rec.nameservers

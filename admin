@@ -11,7 +11,7 @@ cd ansible
 source utilities/init.sh
 
 PS3='What do you want to do? '
-options=("View Running Hosts" "Add Domain" "Quit")
+options=("View Running Hosts" "Add Domain" "Get Name Server" "Quit")
 
 select opt in "${options[@]}"
 do
@@ -23,6 +23,11 @@ do
             echo -n "Enter your new domain and press [ENTER]: "
             read domain
             ansible-playbook add_domain.yaml -e domain=$domain -vvv
+            ;;
+        "Get Name Server")
+            echo -n "Enter requested domain and press [ENTER]: "
+            read domain
+            ansible-playbook get_nameserver.yaml -e domain=$domain -vvv
             ;;
         "Quit")
             break
